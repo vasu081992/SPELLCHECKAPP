@@ -12,26 +12,52 @@ const customDictionary = {
 };
 
 const SpellCheckApp = () => {
+
   const [inputText, setInputText] = useState("");
   const [suggestedText, setSuggestedText] = useState("");
 
-  const handleInputChange = (e) => {
-    const text = e.target.value;
-    setInputText(text);
+const [correctedText,setcorrectedText]= useState('')
 
-    const words = text.split(" ");
-    const correctedWords = words.map((word) => {
-      const correctedWord = customDictionary[word.toLowerCase()];
-      return correctedWord || word;
-    });
 
-    const correctedText = correctedWords.join(" ");
+console.log("typed text",inputText)
 
-    const firstCorrection = correctedWords.find(
-      (word, index) => word !== words[index]
-    );
-    setSuggestedText(firstCorrection || "");
-  };
+console.log("correctedText",correctedText)
+
+
+
+
+const handleInputChange = (e)=>{
+
+  const text = e.target.value;
+
+  setInputText(text);
+
+  const arrayofWordsTyped = text.split(' ');
+
+  const correctedwordsArray = arrayofWordsTyped.map((word)=> {
+    
+     const correctedWord = customDictionary[word.toLowerCase()];
+
+       return correctedWord || word;  
+
+  })
+
+     const correctedText = correctedwordsArray.join(" ");
+
+     setcorrectedText(correctedText)
+
+      let firstCorrection = correctedwordsArray.find((word,index)=>(
+    
+       word!==arrayofWordsTyped[index]
+
+      ))
+
+
+     setSuggestedText(firstCorrection)
+
+
+}
+
 
   return (
     <div>
@@ -41,7 +67,7 @@ const SpellCheckApp = () => {
         onChange={handleInputChange}
         placeholder="Enter text..."
         rows={5}
-        cols={40}
+        cols={45}
       />
       {suggestedText && (
         <p>
