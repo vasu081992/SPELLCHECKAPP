@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const customDictionary = {
-  teh: "the,",
+  teh: "the",
   wrok: "work",
   wokr:"work",  
   fot: "for",
